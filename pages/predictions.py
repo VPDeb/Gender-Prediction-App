@@ -15,7 +15,7 @@ occupation = ['Machine-op-inspct', 'Farming-fishing', 'Protective-serv',
        'Exec-managerial', 'Tech-support', 'Sales', 'Priv-house-serv',
        'Transport-moving', 'Handlers-cleaners', 'Armed-Forces']
 
-education = ['Preschool','Elementary','Junior High','High School',
+education = ['Preschool','Elementary','Junior High','High School','High School Grad'
         'Professional School','Some College','Associates VoTech',
         'Associates College','Bachelors','Masters','Doctorate','Prof College']
 
@@ -23,7 +23,21 @@ maritalstatus = ['Never-married','Married-Civilian-Spouse','Widowed',
         'Divorced','Separated','Married-pouse-absent','Married-ArmedForces-spouse']
 race = ['Black', 'White', 'Asian-Pac-Islander', 'Other',
        'Amer-Indian-Eskimo']
-       
+
+nativecountry = ['United-States', 'Peru', 'Guatemala', 'Mexico',
+       'Dominican-Republic', 'Ireland', 'Germany', 'Philippines',
+       'Thailand', 'Haiti', 'El-Salvador', 'Puerto-Rico', 'Vietnam',
+       'South', 'Columbia', 'Japan', 'India', 'Cambodia', 'Poland',
+       'Laos', 'England', 'Cuba', 'Taiwan', 'Italy', 'Canada', 'Portugal',
+       'China', 'Nicaragua', 'Honduras', 'Iran', 'Scotland', 'Jamaica',
+       'Ecuador', 'Yugoslavia', 'Hungary', 'Hong', 'Greece',
+       'Trinadad&Tobago', 'Outlying-US(Guam-USVI-etc)', 'France',
+       'Holand-Netherlands']
+
+over40hr = [1, 0]
+
+incomeover50K = [1, 0]
+
 style = {'padding': '1.5em'}
 
 layout = html.Div([
@@ -84,6 +98,24 @@ layout = html.Div([
         )
     ], style=style),
 
+    html.Div([
+        dcc.Markdown('###### Native Country'), 
+        dcc.Dropdown(
+            id='nativecountry', 
+            options=[{'label': purpose, 'value': purpose} for purpose in nativecountry], 
+            value=nativecountry[0]
+        ),
+    ], style=style),
+
+    html.Div([
+            dcc.Markdown('###### Working Hours'), 
+            dcc.Dropdown(
+                id='over40hrs', 
+                options=[{'label': 'Over 40 hours per week', 'value': 1,},
+                         {'label': '40 hours or less per week', 'value': 0}]
+
+            ),
+        ], style=style),
     dcc.Markdown('### Prediction'), 
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 
@@ -99,12 +131,12 @@ layout = html.Div([
 def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debts):
 
     df = pd.DataFrame(
-        columns=['Annual Income', 'Credit Score', 'Loan Amount', 'Loan Purpose', 'Monthly Debts'], 
-        data=[[annual_income, credit_score, loan_amount, loan_purpose, monthly_debts]]
+        columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','income>50K'], 
+        data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
     )
 
-    #pipeline = load('model/pipeline.joblib')
-    #y_pred_log = pipeline.predict(df)
-    #y_pred = np.expm1(y_pred_log)[0]
+    pipeline = load('model/pipeline.joblib')
+    y_pred_log = pipeline.predict(df)
+    y_pred = np.expm1(y_pred_log)[0]
 
-    #return f'Interest rate for 36 month loan: {y_pred:.2f}%'
+    #return f'Gender Prediction: {y_pred:f}%'
