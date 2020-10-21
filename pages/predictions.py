@@ -15,7 +15,7 @@ occupation = ['Machine-op-inspct', 'Farming-fishing', 'Protective-serv',
        'Exec-managerial', 'Tech-support', 'Sales', 'Priv-house-serv',
        'Transport-moving', 'Handlers-cleaners', 'Armed-Forces']
 
-education = ['Preschool','Elementary','Junior High','High School','High School Grad'
+education = ['Preschool','Elementary','Junior High','High School','High School Grad',
         'Professional School','Some College','Associates VoTech',
         'Associates College','Bachelors','Masters','Doctorate','Prof College']
 
@@ -135,8 +135,8 @@ def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debt
         data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
     )
 
-    pipeline = load('model/pipeline.joblib')
+    pipeline = load('pipeline.joblib')
     y_pred_log = pipeline.predict(df)
     y_pred = np.expm1(y_pred_log)[0]
 
-    #return f'Gender Prediction: {y_pred:f}%'
+    return f'Gender Prediction: {y_pred}%'
