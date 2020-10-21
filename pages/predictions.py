@@ -49,8 +49,7 @@ layout = html.Div([
 
 
     """
-    ), 
-     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),  
+    ),  
     #<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>
 
     html.Div([
@@ -128,6 +127,8 @@ layout = html.Div([
             ),
         ], style=style),
 
+dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),
+
     dcc.Markdown('### Prediction'), 
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 
@@ -157,4 +158,3 @@ def predict(age, education, maritalstatus, occupation, race, nativecountry, over
     return f'Gender Prediction: {y_pred}%'
 
 
-#<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>

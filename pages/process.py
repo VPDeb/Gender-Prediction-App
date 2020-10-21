@@ -16,6 +16,16 @@ column1 = dbc.Col(
             """
         
             ## Process
+            When I began working with my dataset the original prediction was to tell if 
+           someone was making more or less than 50K as their annual income.  With only a 
+           little time to work with the data the challenge was to use the information to 
+           predict something new so I thought insight into whether the values indicated 
+           a Male of Female would be an interesting Machine Learning model.  I was more 
+           more shocked that the accuracy was pretty good for the information that was 
+           fed to the model.  I did a few work arounds and made new features that allowed 
+           the data submissions to read each other in a more cohessive manner.  I found the
+           best model was working with the XGBClassifier.  It gave me the best scores off the
+           bat with my training and validation sets and worked great on my Test set as well.
 
 
             """
