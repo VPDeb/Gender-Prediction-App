@@ -10,17 +10,17 @@ import numpy as np
 import pandas as pd
 from app import app
 
-occupation = ['Machine-op-inspct', 'Farming-fishing', 'Protective-serv',
+occupation = ['Machine Operator-Inspector', 'Farming-fishing', 'Protective-serv',
        'Prof-specialty', 'Other-service', 'Craft-repair', 'Adm-clerical',
        'Exec-managerial', 'Tech-support', 'Sales', 'Priv-house-serv',
        'Transport-moving', 'Handlers-cleaners', 'Armed-Forces']
 
-education = ['Preschool','Elementary','Junior High','High School','High School Grad',
+education = ['Preschool','Elementary(1-6)','Junior High(7-9)','High School(10-12','High School Grad',
         'Professional School','Some College','Associates VoTech',
         'Associates College','Bachelors','Masters','Doctorate','Prof College']
 
 maritalstatus = ['Never-married','Married-Civilian-Spouse','Widowed',
-        'Divorced','Separated','Married-pouse-absent','Married-ArmedForces-spouse']
+        'Divorced','Separated','Married-spouse-absent','Married-ArmedForces-spouse']
 race = ['Black', 'White', 'Asian-Pac-Islander', 'Other',
        'Amer-Indian-Eskimo']
 
@@ -47,8 +47,11 @@ layout = html.Div([
             would be Male or Female.  Then try out your stats and see if the prediction was correct.  Fill out 
             the form and let me know how if it got it right.  I look forward to seeing how it went.
 
-    
-    """), 
+
+    """
+    ), 
+     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),  
+    #<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>
 
     html.Div([
         dcc.Markdown('###### Age'), 
@@ -123,15 +126,18 @@ layout = html.Div([
 
 @app.callback(
     Output('prediction-content', 'children'),
-    [Input('annual-income', 'value'),
-     Input('credit-score', 'value'),
-     Input('loan-amount', 'value'),
-     Input('loan-purpose', 'value'),
-     Input('monthly-debts', 'value')])
+    [Input('age', 'value'),
+     Input('education', 'value'),
+     Input('maritalstatus', 'value'),
+     Input('occupation', 'value'),
+     Input('race', 'value'),
+     Input('nativecountry', 'value'),
+     Input('over40hr','value'),
+     Input('incomeover50K','value')])
 def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debts):
 
     df = pd.DataFrame(
-        columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','income>50K'], 
+        columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
         data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
     )
 
@@ -140,3 +146,6 @@ def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debt
     y_pred = np.expm1(y_pred_log)[0]
 
     return f'Gender Prediction: {y_pred}%'
+
+
+#<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>
