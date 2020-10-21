@@ -151,10 +151,11 @@ def predict(age, education, maritalstatus, occupation, race, nativecountry, over
         data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
     )
 
-    pipeline = load('pipeline.joblib')
-    y_pred_log = pipeline.predict(df)
-    y_pred = np.expm1(y_pred_log)[0]
-
-    return f'Gender Prediction: {y_pred}%'
+    pipeline = load('../pipeline.joblib')
+    #y_pred_log = pipeline.predict(df)
+    #y_pred = np.expm1(y_pred_log)[0]
+    y_pred = pipeline.predict(df)
+    print(y_pred)
+    return f'Gender Prediction: {y_pred}'
 
 
