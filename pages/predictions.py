@@ -50,7 +50,7 @@ layout = html.Div([
 
     """
     ), 
-     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),  
+     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://docs.google.com/forms/d/e/1FAIpQLScQ4nJTnLk56eVA3EkI1Pr6ZCJCwexXPEWLGf6pFw_B1PfmyA/viewform?usp=sf_link'),  
     #<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>
 
     html.Div([
