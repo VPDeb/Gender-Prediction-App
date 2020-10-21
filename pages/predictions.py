@@ -50,7 +50,7 @@ layout = html.Div([
 
     """
     ), 
-     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://docs.google.com/forms/d/e/1FAIpQLScQ4nJTnLk56eVA3EkI1Pr6ZCJCwexXPEWLGf6pFw_B1PfmyA/viewform?usp=sf_link'),  
+     dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),  
     #<button type="button" class="btn btn-info btn-lg">Submit Your Prediction</button>
 
     html.Div([
@@ -115,10 +115,19 @@ layout = html.Div([
             dcc.Dropdown(
                 id='over40hrs', 
                 options=[{'label': 'Over 40 hours per week', 'value': 1,},
-                         {'label': '40 hours or less per week', 'value': 0}]
+                         {'label': '40 hours or less per week', 'value': 0}],
+               ),
+        ], style=style),
 
+    html.Div([
+            dcc.Markdown('###### Income'), 
+            dcc.Dropdown(
+                id='incomeover50K', 
+                options=[{'label': 'More than 50K', 'value': 1,},
+                         {'label': 'Less than 50K', 'value': 0}],    
             ),
         ], style=style),
+
     dcc.Markdown('### Prediction'), 
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 
@@ -134,7 +143,7 @@ layout = html.Div([
      Input('nativecountry', 'value'),
      Input('over40hr','value'),
      Input('incomeover50K','value')])
-def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debts):
+def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
 
     df = pd.DataFrame(
         columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
