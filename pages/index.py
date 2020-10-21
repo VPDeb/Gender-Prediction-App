@@ -24,7 +24,7 @@ column1 = dbc.Col(
             Male of Female
             """
         ),
-        dcc.Link(dbc.Button('Your Call To Action', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Lets Predict', color='primary'), href='/predictions')
     ],
     md=4,
 )
