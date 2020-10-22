@@ -21,7 +21,9 @@ column1 = dbc.Col(
             What if you had some insights into a persons life and you could use it find out if the
             individual was a Male of Female.  This app is little fun setup where you can change your
             values and make a prediction whether or not this information believes the person would be 
-            Male of Female
+            Male of Female.  When you are done working with the prediction portion of the model I'd love
+            to hear feedback, please click the google symbol to be redirected to a google form to fill in
+            your specific data and let me know it your prediction was correct with your real life values.
             """
         ),
         dcc.Link(dbc.Button('Lets Predict', color='btn btn-info'), href='/predictions')

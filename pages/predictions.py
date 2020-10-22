@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from app import app
 
-pipeline = joblib.load("/newpipeline.joblib")
+#pipeline = load('pages/newpipeline.joblib')
 
 @app.callback(
     Output('prediction-content', 'children'),
@@ -151,8 +151,8 @@ layout = html.Div([
 
 dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://forms.gle/wcgmL2jqSgwsTmxLA'),
 
-    #dcc.Markdown('### Prediction'), 
-    #html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
+    dcc.Markdown('### Prediction'), 
+    html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 
 ])
 
@@ -163,18 +163,18 @@ dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://
 #@app.callback(
     #Output('prediction-content', 'children'),
     #[Input('age', 'value'),
-    # Input('education', 'value'),
-     #Input('maritalstatus', 'value'),
-     #Input('occupation', 'value'),
-     #Input('race', 'value'),
-     #Input('nativecountry', 'value'),
-     #Input('over40hr','value'),
+     #Input('education', 'value'),
+    # Input('maritalstatus', 'value'),
+    # Input('occupation', 'value'),
+    # Input('race', 'value'),
+    # Input('nativecountry', 'value'),
+    # Input('over40hr','value'),
      #Input('incomeover50K','value')])
 #def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
     #df = pd.DataFrame(
         #columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
         #data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
-    #)
+   # )
 
     #y_pred = pipeline.predict(df)[0]
     #return f'Gender Prediction {y_pred}'
