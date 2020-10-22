@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from app import app
 
-pipeline = load('pages/RFpipeline.joblib')
+pipeline = load('pages/Pipeline.joblib')
 
 @app.callback(
     Output('prediction-content', 'children'),
