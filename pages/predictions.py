@@ -5,12 +5,13 @@ from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import joblib
+import pickle
 from joblib import load
 import numpy as np
 import pandas as pd
 from app import app
 
-pipeline = joblib.load('pages/newpipeline.joblib')
+pipeline = pickle.load(open("pages/pima.pickle.dat", "rb"))
 
 @app.callback(
     Output('prediction-content', 'children'),
