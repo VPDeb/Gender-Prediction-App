@@ -4,11 +4,32 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-#mport joblib
-#from joblib import load
+import joblib
+from joblib import load
 import numpy as np
 import pandas as pd
 from app import app
+
+pipeline = load('../pipeline.joblib')
+
+@app.callback(
+    Output('prediction-content', 'children'),
+    [Input('age', 'value'),
+     Input('education', 'value'),
+     Input('maritalstatus', 'value'),
+     Input('occupation', 'value'),
+     Input('race', 'value'),
+     Input('nativecountry', 'value'),
+     Input('over40hr','value'),
+     Input('incomeover50K','value')])
+def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
+    df = pd.DataFrame(
+        columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
+        data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
+    )
+
+    y_pred = pipeline.predict(df)[0]
+    return f'Gender Prediction {y_pred}'
 
 occupation = ['Machine Operator-Inspector', 'Farming-fishing', 'Protective-serv',
        'Prof-specialty', 'Other-service', 'Craft-repair', 'Adm-clerical',
@@ -134,6 +155,10 @@ dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://
 
 ])
 
+
+
+pipeline = load('../pipeline.joblib')
+
 @app.callback(
     Output('prediction-content', 'children'),
     [Input('age', 'value'),
@@ -145,17 +170,10 @@ dcc.Link(dbc.Button('Submit Your Results', color='btn btn-info'), href='https://
      Input('over40hr','value'),
      Input('incomeover50K','value')])
 def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
-
     df = pd.DataFrame(
         columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
         data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
     )
 
-    pipeline = load('../pipeline.joblib')
-    #y_pred_log = pipeline.predict(df)
-    #y_pred = np.expm1(y_pred_log)[0]
-    y_pred = pipeline.predict(df)
-    print(y_pred)
-    return f'Gender Prediction: {y_pred}'
-
-
+    y_pred = pipeline.predict(df)[0]
+    return f'Gender Prediction {y_pred}'
