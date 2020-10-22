@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from app import app
 
-pipeline = load('../pipeline.joblib')
+pipeline = joblib.load('pages/pipeline.joblib')
 
 @app.callback(
     Output('prediction-content', 'children'),
