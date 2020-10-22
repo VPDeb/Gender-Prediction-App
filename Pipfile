@@ -12,6 +12,9 @@ gunicorn = "*"
 plotly = "*"
 pandas = "*"
 jupyterlab = "*"
+joblib = "==0.16.0"
+category-encoders = "==2.2.2"
+xgboost = "==0.90"
 
 [requires]
 python_version = "3.8.5"

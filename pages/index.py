@@ -31,14 +31,21 @@ column1 = dbc.Col(
     md=4,
 )
 
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+#census = px.data.census()
+#fig = px.scatter(census, x="occupation", y="native-country",color="education",
+ #                size='age', hover_data=['gender-F/1-M/0'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
+ #                                                                 'age':'Age','native-country':'Native Country','occupation':'Occupation'},
+ #                title='Gender Bias Insights')
+#fig.update_layout(legend = dict(bgcolor ='gray'))
 
+#gapminder = px.data.gapminder()
+#fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
+#           hover_name="country", log_x=True, size_max=60)
+#
 column2 = dbc.Col(
-    [
-        dcc.Graph(figure=fig),
+   [
+        #dcc.Graph(figure=fig),
     ]
 )
 
-layout = dbc.Row([column1, column2])
+#layout = dbc.Row([column1, column2])
