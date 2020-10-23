@@ -9,7 +9,7 @@ import pickle
 from joblib import load
 import numpy as np
 import pandas as pd
-from app import app
+from pages.app import app
 
 pipeline = load('pages/XGBN_pipeline.joblib')
 
