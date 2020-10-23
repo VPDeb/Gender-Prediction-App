@@ -20,18 +20,25 @@ pipeline = load('pages/XGB_pipeline.joblib')
      Input('maritalstatus', 'value'),
      Input('occupation', 'value'),
      Input('race', 'value'),
-     Input('native-country', 'value'),
-     Input('over40hr','value'),
+     Input('nativecountry', 'value'),
+     Input('over40hrs','value'),
      Input('incomeover50K','value')])
 def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
     df = pd.DataFrame(
-        columns=['age', 'education', 'marital-status', 'occupation', 'race','native-country','over40hrs','incomeover50K'], 
-        data=[[age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K]]
+        columns=['age', 'workclass', 'education', 'education-num', 'marital-status',
+       'occupation', 'relationship', 'race', 'native-country',
+       'income_over_50K', 'over40hrs'], 
+        data=[[age, 'Private',education,9, maritalstatus, occupation, 'Spouse', race, nativecountry,int(incomeover50K),int(over40hrs)]]
     )
     print(df)
     y_pred = pipeline.predict(df)[0]
     print(y_pred)
-    return f'Gender Prediction {y_pred}'
+    if y_pred: 
+        gender='Female'
+    else:
+        gender='Male'
+    print(pipeline.predict_proba(df))
+    return f'Gender Prediction: {gender}'
 
 occupation = ['Machine Operator-Inspector', 'Farming-fishing', 'Protective-serv',
        'Prof-specialty', 'Other-service', 'Craft-repair', 'Adm-clerical',
@@ -57,9 +64,7 @@ nativecountry = ['United-States', 'Peru', 'Guatemala', 'Mexico',
        'Trinadad&Tobago', 'Outlying-US(Guam-USVI-etc)', 'France',
        'Holand-Netherlands']
 
-over40hr = [1, 0]
 
-incomeover50K = [1, 0]
 
 style = {'padding': '1.5em'}
 
@@ -136,8 +141,9 @@ layout = html.Div([
             dcc.Markdown('###### Working Hours'), 
             dcc.Dropdown(
                 id='over40hrs', 
-                options=[{'label': 'Over 40 hours per week', 'value': 1,},
+                options=[{'label': 'Over 40 hours per week', 'value': 1},
                          {'label': '40 hours or less per week', 'value': 0}],
+                value= 1
                ),
         ], style=style),
 
@@ -145,8 +151,9 @@ layout = html.Div([
             dcc.Markdown('###### Income'), 
             dcc.Dropdown(
                 id='incomeover50K', 
-                options=[{'label': 'More than 50K', 'value': 1,},
-                         {'label': 'Less than 50K', 'value': 0}],    
+                options=[{'label': 'More than 50K', 'value': 1},
+                         {'label': 'Less than 50K', 'value': 0}],
+                value = 1    
             ),
         ], style=style),
 
