@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from app import app
 
-pipeline = load('pages/Pipeline.joblib')
+pipeline = load('pages/XGB3pipeline.joblib')
 
 @app.callback(
     Output('prediction-content', 'children'),

@@ -1,5 +1,6 @@
 # Imports from 3rd party libraries
 import dash
+import pandas as pd
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
@@ -30,21 +31,21 @@ column1 = dbc.Col(
     ],
     md=4,
 )
+gender_prop = pd.read_csv('https://raw.githubusercontent.com/VPDeb/Build-Gender-Bias-Insight-App/master/pages/gender_prop.csv')
+df = px.data.iris()
+fig = px.scatter(gender_prop, x="occupation", y="native-country",color="education",
+                size='age', hover_data=['gender-F/1-M/0'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
+                                                                 'age':'Age','native-country':'Native Country','occupation':'Occupation'},
+                title='Gender Bias Insights')
+fig.update_layout(legend = dict(bgcolor ='gray'))
 
-#census = px.data.census()
-#fig = px.scatter(census, x="occupation", y="native-country",color="education",
- #                size='age', hover_data=['gender-F/1-M/0'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
- #                                                                 'age':'Age','native-country':'Native Country','occupation':'Occupation'},
- #                title='Gender Bias Insights')
-#fig.update_layout(legend = dict(bgcolor ='gray'))
+gapminder = px.data.gapminder()
+fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
+           hover_name="country", log_x=True, size_max=60)
 
-#gapminder = px.data.gapminder()
-#fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-#           hover_name="country", log_x=True, size_max=60)
-#
 column2 = dbc.Col(
    [
-        #dcc.Graph(figure=fig),
+        dcc.Graph(figure=fig),
     ]
 )
 
