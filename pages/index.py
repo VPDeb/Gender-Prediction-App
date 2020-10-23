@@ -25,6 +25,10 @@ column1 = dbc.Col(
             Male of Female.  When you are done working with the prediction portion of the model I'd love
             to hear feedback, please click the google symbol to be redirected to a google form to fill in
             your specific data and let me know it your prediction was correct with your real life values.
+           
+           Feel free to toggle the Education levels off and on and hover over the dots to get a feel for the 
+           data and when your all set click the link below to make some predictions and submit your results.
+           
             """
         ),
         dcc.Link(dbc.Button('Lets Predict', color='btn btn-info'), href='/predictions')
@@ -33,15 +37,11 @@ column1 = dbc.Col(
 )
 gender_prop = pd.read_csv('https://raw.githubusercontent.com/VPDeb/Build-Gender-Bias-Insight-App/master/pages/gender_prop.csv')
 df = px.data.iris()
-fig = px.scatter(gender_prop, x="occupation", y="native-country",color="education",
-                size='age', hover_data=['gender-F/1-M/0'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
+fig = px.scatter(gender_prop, x="occupation", y="native-country",color="gender-F/1-M/0",
+                size='age', hover_data=['education'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
                                                                  'age':'Age','native-country':'Native Country','occupation':'Occupation'},
-                title='Gender Bias Insights')
-fig.update_layout(legend = dict(bgcolor ='gray'))
-
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+                title='Gender Bias Insights',width=800, height=700)
+fig.update_layout(legend = dict(bgcolor ='gray'),paper_bgcolor="black",plot_bgcolor='black')
 
 column2 = dbc.Col(
    [
@@ -49,4 +49,4 @@ column2 = dbc.Col(
     ]
 )
 
-#layout = dbc.Row([column1, column2])
+layout = dbc.Row([column1, column2])
