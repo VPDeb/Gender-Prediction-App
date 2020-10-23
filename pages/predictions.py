@@ -26,7 +26,7 @@ pipeline = load('pages/XGB_pipeline.joblib')
 def predict(age, education, maritalstatus, occupation, race, nativecountry, over40hrs, incomeover50K):
     df = pd.DataFrame(
         columns=['age', 'workclass', 'education', 'education-num', 'marital-status',
-       'occupation', 'relationship', 'race', 'native-country',
+       'occupation', 'race', 'native-country',
        'income_over_50K', 'over40hrs'], 
         data=[[age, 'Private',education,9, maritalstatus, occupation, 'Spouse', race, nativecountry,int(incomeover50K),int(over40hrs)]]
     )
