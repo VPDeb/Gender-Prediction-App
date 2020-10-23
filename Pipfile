@@ -15,6 +15,7 @@ scikit-learn = "==0.22.1"
 category-encoders = "==2.2.2"
 xgboost = "==0.90"
 app = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
