@@ -35,7 +35,7 @@ column1 = dbc.Col(
     ],
     md=4,
 )
-gender_prop = pd.read_csv('https://raw.githubusercontent.com/VPDeb/Build-Gender-Bias-Insight-App/master/pages/gender_prop.csv')
+gender_prop = pd.read_csv('https://raw.githubusercontent.com/VPDeb/Build-Gender-Bias-Insight-App/master/pages/testdata.csv')
 df = px.data.iris()
 fig = px.scatter(gender_prop, x="occupation", y="native-country",color="gender-F/1-M/0",
                 size='age', hover_data=['education'],labels={'gender-F/1-M/0':'Male/Female','education':'Education',
